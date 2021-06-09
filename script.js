@@ -111,3 +111,26 @@ const text =
 
 // console.log(regexSearch(text)); // 43; position of dot (.);
 // 61 position of (?) after omitting dot(.);
+
+
+// ******************************************
+// 9. String.prototype.split()
+// ******************************************
+
+// The split() method divides a String into an ordered set of substrings, puts these substrings into an array, and returns the array.
+// The division is done by searching for a pattern; where the pattern is provided as the first parameter in the method’s call.
+const splitString = (str, regex) => {
+  const sections = str.split(regex);
+  return sections;
+};
+
+const string2 = 'a1 b2 c3 d4 la f5';
+const string3 = 'a1b2 c3d4 laf5';
+
+// console.log(splitString(string2, /\d/)); // ["a", " b", " c", " d", " la f", ""];
+
+// console.log(splitString(string2, /[a-z]/));
+//  ["", "1 ", "2 ", "3 ", "4 ", "", " ", "5"]
+
+// console.log(splitString(string2, /\s/));
+//["a1", "b2", "c3", "d4", "la", "f5"]
