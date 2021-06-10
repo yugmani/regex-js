@@ -112,6 +112,54 @@ const text =
 // console.log(regexSearch(text)); // 43; position of dot (.);
 // 61 position of (?) after omitting dot(.);
 
+// ******************************************
+// 7. String.prototype.replace()
+// ******************************************
+
+// The replace() method returns a new string with some or all matches of a pattern replaced by a replacement.
+
+// If the pattern is a string but not RegExp, only the first occurrence will be replaced.
+
+// Note that the original string will remain unchanged.
+
+const regexReplace = str => {
+  const regex = /dog/gi;
+  return str.replace(regex, 'monkey');
+};
+
+const stringReplace = str => {
+  return str.replace('dog', 'monkey');
+};
+
+const para =
+  'The quick brown fox jumps over the lazy dog. If the dog barked, was it really lazy?';
+
+// console.log(regexReplace(para));
+// The quick brown fox jumps over the lazy monkey. If the monkey barked, was it really lazy?
+
+// console.log(stringReplace(para));
+// The quick brown fox jumps over the lazy monkey. If the dog barked, was it really lazy?
+
+// Compare the differences of outputs
+
+// ******************************************
+// 8. String.prototype.replaceAll()
+// ******************************************
+
+// The replaceAll() method returns a new string with all matches of a pattern replaced by a replacement.
+
+const regexReplaceAll = str => {
+  const regex = /dog/gi;
+  return str.replaceAll('dog', 'monkey');
+  // return str.replaceAll(regex, 'monkey');
+};
+
+console.log(regexReplaceAll(para));
+// The quick brown fox jumps over the lazy monkey. If the monkey barked, was it really lazy?
+
+// Similar to before (7), but now we replace all the matches.
+
+// avoid this function as we can always do it with regular expressions and using the replace() function plus is a function that is not supported in all platforms/browsers.
 
 // ******************************************
 // 9. String.prototype.split()
