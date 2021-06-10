@@ -214,12 +214,12 @@ const regexAnchoring = (regex, str) => {
 
 // regular expressions has the ability to match by character or numeric range
 
-const regexMatchRange=(regex, str)=>{
-return [...str.match(regex)];
-}
+const regexMatchRange = (regex, str) => {
+  return [...str.match(regex)];
+};
 
-const string4 = 'I spent $520 in MaY.'
-const string5 = "javascript"
+const string4 = 'I spent $520 in MaY.';
+const string5 = 'javascript';
 // console.log(regexMatchRange(/[a-z]/g, string4));
 // Lowercase: ["s", "p", "e", "n", "t", "i", "n", "a", "y"]
 // console.log(regexMatchRange(/[A-Z]/g, string4));
@@ -352,3 +352,72 @@ const string5 = "javascript"
 // console.log(/^\d{3,}$/.test('542'))  //true
 // console.log(/^\d{3,}$/.test('7'))   //false;
 // console.log(/^\d{3,}$/.test('0'))  //false
+
+// ******************************************
+// 16. Escaping
+// ******************************************
+
+//  to match by one of those characters
+// console.log(/^\^$/.test('^'))   // true
+// console.log(/^\$$/.test('$'))    //true
+// console.log(/^\$$/.test('$$'))  //false
+
+// ******************************************
+// 17. Groups
+// ******************************************
+
+// Using parentheses, you can create groups of characters: `(...)`:
+
+// console.log(/^\d{3}(\w+)$/.test('123'))   // false
+// console.log(/^\d{3}(\w+)$/.test('123s'))    //true
+// console.log(/^\d{3}(\w+)$/.test('12s'))  //false
+// console.log(/^\d{3}(\w+)$/.test('123JavaScript')) //true
+// console.log(/^\d{3}(\w+)$/.test('12345'));  //true
+
+// console.log(/^\w{3}(\d)$/.test('abc1'))   //true
+// console.log(/^\w{3}(\d+)$/.test('abc1235')) //true
+// console.log(/^\w{3,}(\d+)$/.test('abcefs1234')) //true
+// console.log(/^\w{3,}(\d+)$/.test('abcdef')) //false
+
+// use the qualifiers (like the repetition or the optional qualifier) for a group:
+
+// console.log(/^(\d{2})+$/.test('12'))    //true
+// console.log(/^(\d{2})+$/.test('123'))    //false
+// console.log(/^(\d{2})+$/.test('1234'))    //true
+
+// ******************************************
+// 18.  Named capture groups:
+// ******************************************
+
+// With ES2018 it is now possible to assign names to groups,
+// so that working with the results is much easier, take a look at the following example without naming groups:
+
+const regexGroups = today => {
+  const reg = /(\d{4})-(\d{2})-(\d{2})/;
+  const result = reg.exec(today);
+  return result;
+};
+
+// console.log(regexGroups('2015-01-02'));
+// (4) ["2015-01-02", "2015", "01", "02", index: 0, input: "2015-01-02", groups: undefined];
+
+// ***** Now using named groups ***** 
+
+const regexNamedGroups = today => {
+  const reg = /(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})/;
+  const result = reg.exec(today);
+  return result;
+};
+
+console.log(regexNamedGroups('2015-01-02'));
+// (4) ["2015-01-02", "2015", "01", "02", index: 0, input: "2015-01-02", groups: {…}]
+// 0: "2015-01-02"
+// 1: "2015"
+// 2: "01"
+// 3: "02"
+// groups:{year: "2015", month: "01", day: "02"}
+// index: 0
+// input: "2015-01-02"
+// length: 4
+// __proto__: Array(0)
+
