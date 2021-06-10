@@ -401,7 +401,7 @@ const regexGroups = today => {
 // console.log(regexGroups('2015-01-02'));
 // (4) ["2015-01-02", "2015", "01", "02", index: 0, input: "2015-01-02", groups: undefined];
 
-// ***** Now using named groups ***** 
+// ***** Now using named groups *****
 
 const regexNamedGroups = today => {
   const reg = /(?<year>\d{4})-(?<month>\d{2})-(?<day>\d{2})/;
@@ -409,7 +409,7 @@ const regexNamedGroups = today => {
   return result;
 };
 
-console.log(regexNamedGroups('2015-01-02'));
+// console.log(regexNamedGroups('2015-01-02'));
 // (4) ["2015-01-02", "2015", "01", "02", index: 0, input: "2015-01-02", groups: {…}]
 // 0: "2015-01-02"
 // 1: "2015"
@@ -421,3 +421,36 @@ console.log(regexNamedGroups('2015-01-02'));
 // length: 4
 // __proto__: Array(0)
 
+// ******************************************
+// 19.  Flags
+// ******************************************
+
+// regular expressions have some flags which change the behavior for the matches:
+
+// `g`: matches the pattern multiple times
+// `i`: makes the regex case insensitive
+// `m`: enables multiline mode. In this mode, ^ and $ match the start and end of the whole string. Without this, with multiline strings they match the beginning and end of each line.
+// `u`: enables support for unicode (introduced in ES6/ES2015)
+// `s`: short for single line, it causes the . to match new line characters as well
+
+// Flags can be combined, and in the case of regex literals they are set at the end of the regex:
+
+// ***** Using Regex Literal *****
+
+// console.log(/hello/ig.test('hello'));   //true
+// console.log(('Hello ! Hi how are you?').match(/h/g));
+// ["h"]
+// console.log(('Hello ! Hi how are you?').match(/H/g));   // (2) ["H", "H"]
+// console.log(('Hello ! Hi how are you?').match(/h/ig));
+// (3) ["H", "H", "h"]
+
+// ******* Using the constructor as a second parameter of the function ********
+
+const result1 = new RegExp('hello', 'g').test('Hello');
+// console.log(result1); //false;
+
+const result2 = new RegExp('hello', 'i').test('Hello');
+// console.log(result2); //true;
+
+const result3 = new RegExp('hello', 'ig').test('Hello');
+// console.log(result3); //true;
