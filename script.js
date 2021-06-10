@@ -282,3 +282,73 @@ const string5 = "javascript"
 // `\b` matches a set of characters at the beginning or end of a word
 // `\B` matches a set of characters not at the beginning or end of a word
 
+// ******************************************
+// 12. Regular expression choices (or)
+// ******************************************
+
+// If you want to search one string or another, use the | operator:
+
+// console.log(/foo|bar/.test('foo'))  //true
+// console.log(/foo|bar/.test('bar'))    //true
+// console.log(/foo|bar/.test('boo'))    //false
+
+// ******************************************
+// 13. Quantifiers
+// ******************************************
+
+// Quantifiers are special operators, here are some of them:
+
+// `?:` optional quantifier Imagine you need to find if a string contains one digit in it, just the one, you can do something like:
+
+// console.log(/^\d$/.test('1'))   //true;
+// console.log(/^\d$/.test('a'))   //false;
+// console.log(/^\d\d\d$/.test('703'))   //true;
+// console.log(/^\d\d\d$/.test('73'))   //false;
+// console.log(/^\d?$/.test('2'))   //true;
+
+// `+`:  1 ore more Matches one or more (>=1) items:
+// console.log(/^\d+$/.test('12345'))   //true;
+// console.log(/^\d+$/.test('123ab'))   //false;
+// console.log(/^\d+$/.test(''))   //false;
+
+// ******************************************
+// 14. `*`:  0 ore more Matches cero or more (>=0) items:
+// ******************************************
+
+// console.log(/^\d*$/.test('10'))   //true
+// console.log(/^\d*$/.test('12345'))   //true;
+// console.log(/^\d*$/.test('123ab'))   //false;
+// console.log(/^\d*$/.test(''))   //true;
+
+// ******************************************
+// 15. `{n}`: fixed number of matches Matches exactly n items:
+// ******************************************
+
+// console.log(/^\d{3}$/.test('103'))   //true
+// console.log(/^\d{3}$/.test('12345'))   //false;
+// console.log(/^\d{3}$/.test('123ab'))   //false;
+// console.log(/^\d{3}$/.test('abc'))  //false
+// console.log(/^\d{3}$/.test(''))  //false
+// console.log(/^[A-Za-z0-9]{3}$/.test('Abc'))  //true
+
+// ******************************************
+// 15. `{n, m}`: n to m number of matches Matches between n and m times:
+// ******************************************
+
+// console.log(/^\d{3,5}$/.test('123'))   //true
+// console.log(/^\d{3,5}$/.test('1234'))   //true;
+// console.log(/^\d{3,5}$/.test('12345'))   //true;
+// console.log(/^\d{3,5}$/.test('542'))  //true
+// console.log(/^\d{3,5}$/.test('758960'))   //false;
+// console.log(/^\d{3,5}$/.test('123450'))  //false
+
+// ******************************************
+// 15. `m` can also be omitted, in that case, it will match at least n items:
+// ******************************************
+
+// console.log(/^\d{3,}$/.test('12'))   //false
+// console.log(/^\d{3,}$/.test('1234'))   //true;
+// console.log(/^\d{3,}$/.test('12345'))   //true;
+// console.log(/^\d{3,}$/.test('542'))  //true
+// console.log(/^\d{3,}$/.test('7'))   //false;
+// console.log(/^\d{3,}$/.test('0'))  //false
