@@ -183,7 +183,6 @@ const string3 = 'a1b2 c3d4 laf5';
 // console.log(splitString(string2, /\s/));
 //["a1", "b2", "c3", "d4", "la", "f5"]
 
-
 // ******************************************
 // 10. Anchoring
 // ******************************************
@@ -194,9 +193,9 @@ const string3 = 'a1b2 c3d4 laf5';
 
 // If you want to match strings that end with `world`, use the ($) operator: /world$/
 
-const regexAnchoring = (regex, str)=>{
+const regexAnchoring = (regex, str) => {
   return regex.test(str);
-}
+};
 
 // console.log(regexAnchoring(/^hello/, "hello world"));   //true
 // console.log(regexAnchoring(/^hello/, "It is JS, hello world!"));    //false
@@ -205,6 +204,81 @@ const regexAnchoring = (regex, str)=>{
 
 // To find strings with wildcards in the middle you can use (.*), which matches any characted repeated 0 or more times:
 
-console.log(regexAnchoring(/^hello.*Juan$/, 'hello world Juan'))  //true;
-console.log(regexAnchoring(/^hello.*Juan$/, "helloJuan"));    //true
-console.log(regexAnchoring(/^hello.*Juan$/, 'hello Juan!')) //false;
+// console.log(regexAnchoring(/^hello.*Juan$/, 'hello world Juan'))  //true;
+// console.log(regexAnchoring(/^hello.*Juan$/, "helloJuan"));    //true
+// console.log(regexAnchoring(/^hello.*Juan$/, 'hello Juan!')) //false;
+
+// ******************************************
+// 11. Match items by character or numeric range
+// ******************************************
+
+// regular expressions has the ability to match by character or numeric range
+
+const regexMatchRange=(regex, str)=>{
+return [...str.match(regex)];
+}
+
+const string4 = 'I spent $520 in MaY.'
+const string5 = "javascript"
+// console.log(regexMatchRange(/[a-z]/g, string4));
+// Lowercase: ["s", "p", "e", "n", "t", "i", "n", "a", "y"]
+// console.log(regexMatchRange(/[A-Z]/g, string4));
+// Uppercase: ["I", "M"]
+// console.log(regexMatchRange(/[aeiou]/g, string4));
+// Vowels: ["e", "i", "a"]
+
+//  combine ranges:
+// console.log(regexMatchRange(/[a-zA-Z]/g, string4));
+//All alphabets: ["I", "s", "p", "e", "n", "t", "i", "n", "M", "a", "Y"]
+// console.log(regexMatchRange(/[a-zA-Z0-9]/g, string4));
+//alpha-numeric: ["I", "s", "p", "e", "n", "t", "5", "2", "0", "i", "n", "M", "a", "Y"]
+
+// Negating a pattern
+// We saw that the ^ character at the beginning of a pattern anchors it to the beginning of a string. However when used inside a range, it negates it, so:
+
+// console.log(regexMatchRange(/[^aeiou]/g, string5));
+// Consonants: ["j", "v", "s", "c", "r", "p", "t"]
+// console.log(regexMatchRange(/[0-9]/g, string4));
+// ["5", "2", "0"]
+// console.log(regexMatchRange(/[^a-zA-Z0-9\s]/g, string4)); //Symbols: ["$", "."]
+
+// `\d` matches any digit, equivalent to [0-9]
+// console.log(regexMatchRange(/\d/g, string4));
+// Numbers: (3) ["5", "2", "0"]
+
+// `\D` matches any character that’s not a digit, equivalent to [^0-9]
+// console.log(regexMatchRange(/\D/g, string4));
+// (17) ["I", " ", "s", "p", "e", "n", "t", " ", "$", " ", "i", "n", " ", "M", "a", "Y", "."]
+
+// `\w` matches any alphanumeric character (plus underscore), equivalent to [A-Za-z_0-9]
+// console.log(regexMatchRange(/\w/g, string4));
+// (14) ["I", "s", "p", "e", "n", "t", "5", "2", "0", "i", "n", "M", "a", "Y"]
+
+// `\W` matches any non-alphanumeric character, anything except [^A-Za-z_0-9]
+// console.log(regexMatchRange(/\W/g, string4));
+// (6) [" ", " ", "$", " ", " ", "."]
+
+//  `\s` matches any whitespace character: spaces, tabs, newlines and Unicode spaces
+// console.log(regexMatchRange(/\s/g, string4));
+// (4) [" ", " ", " ", " "]
+
+//  `\S` matches any character that’s not a whitespace
+// console.log(regexMatchRange(/\S/g, string4));
+//  (16) ["I", "s", "p", "e", "n", "t", "$", "5", "2", "0", "i", "n", "M", "a", "Y", "."]
+
+// `\0` matches null
+// `\n` matches a newline character
+// `\t` matches a tab character
+// `\uXXXX` matches a unicode character with code XXXX (requires the u flag)
+
+// (.) matches any character that is not a newline char (e.g. \n) (unless you use the s flag, explained later on)
+// console.log(regexMatchRange(/./g, string4));
+// (20) ["I", " ", "s", "p", "e", "n", "t", " ", "$", "5", "2", "0", " ", "i", "n", " ", "M", "a", "Y", "."]
+
+// [^] matches any character, including newline characters. It’s useful on multiline strings
+// console.log(regexMatchRange(/[^]/g, string4));
+// (20) ["I", " ", "s", "p", "e", "n", "t", " ", "$", "5", "2", "0", " ", "i", "n", " ", "M", "a", "Y", "."]
+
+// `\b` matches a set of characters at the beginning or end of a word
+// `\B` matches a set of characters not at the beginning or end of a word
+
