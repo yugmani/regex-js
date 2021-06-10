@@ -154,7 +154,7 @@ const regexReplaceAll = str => {
   // return str.replaceAll(regex, 'monkey');
 };
 
-console.log(regexReplaceAll(para));
+// console.log(regexReplaceAll(para));
 // The quick brown fox jumps over the lazy monkey. If the monkey barked, was it really lazy?
 
 // Similar to before (7), but now we replace all the matches.
@@ -182,3 +182,29 @@ const string3 = 'a1b2 c3d4 laf5';
 
 // console.log(splitString(string2, /\s/));
 //["a1", "b2", "c3", "d4", "la", "f5"]
+
+
+// ******************************************
+// 10. Anchoring
+// ******************************************
+
+// To match `hello` wherever it was put inside the string --> /hello/
+
+// If you want to match strings that start with `hello`, use the (^) operator: /^hello/
+
+// If you want to match strings that end with `world`, use the ($) operator: /world$/
+
+const regexAnchoring = (regex, str)=>{
+  return regex.test(str);
+}
+
+// console.log(regexAnchoring(/^hello/, "hello world"));   //true
+// console.log(regexAnchoring(/^hello/, "It is JS, hello world!"));    //false
+// console.log(regexAnchoring(/world$/, "hello world"));   //true
+// console.log(regexAnchoring(/world$/, "hello world!"));    //false
+
+// To find strings with wildcards in the middle you can use (.*), which matches any characted repeated 0 or more times:
+
+console.log(regexAnchoring(/^hello.*Juan$/, 'hello world Juan'))  //true;
+console.log(regexAnchoring(/^hello.*Juan$/, "helloJuan"));    //true
+console.log(regexAnchoring(/^hello.*Juan$/, 'hello Juan!')) //false;
