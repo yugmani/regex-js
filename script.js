@@ -454,3 +454,26 @@ const result2 = new RegExp('hello', 'i').test('Hello');
 
 const result3 = new RegExp('hello', 'ig').test('Hello');
 // console.log(result3); //true;
+
+// ******************************************
+// 20.  Validate email address
+// ******************************************
+
+const emailRegex = /[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}/gim;
+
+const result4 = emailRegex.test('someone@mail.com');
+// console.log(result4);   //true
+
+const result5 = emailRegex.test('@some.sdfa');
+// console.log(result5); // false
+
+// ******************************************
+// 21.  Validate Credit card no.
+// ******************************************
+
+const creditCardRegex = /^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$/;
+
+const card = '5100390196378785';
+
+const result6 = creditCardRegex.test(card);
+// console.log(result6);   //true
